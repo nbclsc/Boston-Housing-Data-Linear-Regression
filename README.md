@@ -1,10 +1,10 @@
-###Summary
+### Summary
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this paper the median value of owner-occupied homes in Boston MA is regressed on several covariates. Out of twelve possible predictor variables, the most parsimonious linear regression model contained ten predictor variables. Those predictors include: per capita crime rates by town (`CRIM`), proportion of residential land zoned for lots over 25,000 sq. ft (`ZN`), Charles River dummy variable (`CHAS`), nitric oxides concentration (parts per 10 million) (`NOX`), average number of rooms per dwelling (`RM`), weighted distances to five Boston employment centers (`DIS`), index of accessibility to radial highways (`RAD`), full-value property-tax rate per USD 10,000 (`TAX`), pupil-teacher ratio by town (`PTRATIO`), and percentage of lower status of the population (`LSTAT`). The two predictors left out of the model were: proportion of non-retail business acres per town (`INDUS`) and proportion of owner-occupied units built prior to 1940 (`AGE`). All regression coefficients were statistically significant at the alpha = .05 level.
-###Introduction
+### Introduction
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An important part in land management is predicting home values for specific areas. The knowledge of home prices for areas would give useful information for marketing and retail deployment. There are several variables to consider in building a model to obtain good predictions. Here we will consider several predictors in an attempt to find the most parsimonious model that best explains median value of owner-occupied homes to in Boston MA. Our covariates for prediction include: per capita crime rates by town (`CRIM`), proportion of residential land zoned for lots over 25,000 sq. ft (`ZN`), proportion of non-retail business acres per town (`INDUS`), Charles River dummy variable (`CHAS`), nitric oxides concentration (parts per 10 million) (`NOX`), average number of rooms per dwelling (`RM`), proportion of owner-occupied units built prior to 1940 (`AGE`), weighted distances to five Boston employment centers (`DIS`), index of accessibility to radial highways (`RAD`), full-value property-tax rate per USD 10,000 (`TAX`), pupil-teacher ratio by town (`PTRATIO`), and percentage of lower status of the population (`LSTAT`). In the following sections we will use regression methods with the standard assumptions to find the best fitting models, drawing final conclusions using several diagnostic procedures.
 ###Methods
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To analyze the data of median value of owner-occupied homes (USD 1000’s) and several covariates, R software was utilized in generating least squares regression models.
-###Analysis
+### Analysis
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We begin by fitting the full model:
 <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20Y%3D%5Cbeta_0%20&plus;%20%5Cbeta_1%5C%20CRIM%20&plus;%20%5Cbeta_2%5C%20ZN%20&plus;%20%5Cbeta_3%5C%20INDUS%20&plus;%20%5Cbeta_4%5C%20CHAS%20&plus;%20%5Cbeta_5%5C%20NOX%20&plus;%20%5Cbeta_6%5C%20AGE%20&plus;%20%5Cbeta_7%5C%20RM%20&plus;%20%5Cbeta_8%20DIS%20&plus;%20%5Cbeta_9%5C%20RAD%20&plus;%20%5Cbeta_%7B10%7D%5C%20TAX%20&plus;%20%5Cbeta_%7B11%7D%5C%20PT%5C_RATIO%20&plus;%20%5Cbeta_%7B12%7D%5C%20LSTAT" border=0 />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The scatterplots and correlations of the response versus the predictors suggest a strong positive linear relationship between the response, median home value (`MEDV`), and average number of rooms per dwelling (`RM`) with a correlation of 0.6954. There also appears to be a strong negative relationship between `MEDV` and the percentage of lower status of the population (`LSTAT`) with a correlation of -0.7377. Looking amongst the predictors themselves for correlation we can see that several predictors are highly correlated with one another. Most notably the full-value property tax (`TAX`) and the index of accessibility to radial highways (`RAD`) have the highest correlation of 0.8274. The plot of the residuals versus the fitted values looks unusual. Although there is not an obvious pattern, a faint u-shape is visible. The plots of the residuals versus the predictors also suffers irregularities. The `CRIM`, `RM`, and `LSTAT` exhibit curvilinear patterns, suggesting a non-linear relationship. Other predictors such as DIS and AGE have cone shaped patterns placing the constant error variance assumption in doubt. A normal probability plot and histogram of the residuals also do not look good. There does appear to be right skewness in the data, suggesting the normal error variance assumption is violated. Although remedial measures will need to be implemented, reduction of the number of explanatory variables is first performed via “best” subsets and stepwise regression. The estimated parameters for the full model and their respective p-values can be seen in [**_Table 1_**](#Table-1).
@@ -12,7 +12,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When performing “best” subsets for variable reduction, the results of using Mallows’ <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20C_p" border=0 /> criteria were the same as that using the adjusted <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20R%5E2" border=0 /> criteria. Also performing forward and backward stepwise regression we select the same model as the “best” subsets. The model included 10 predictor variables. That is, all predictors with the exception of `INDUST` and `AGE`. The <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20C_p" border=0 /> value for this model of 9.00089 < p = 11 indicates there is little or no bias in the model. Also note that the model picked using <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20R%5E2" border=0 /> in “best” subsets is the full model. The exact same problems we had for the full model carry over into this reduced model. A formal BP test is performed to confirm the violation of constant error variance, the results provide a p-value < 2.2e-16 which strongly suggest the variance is not constant. A correlation test for normality is also performed to formally test if the data errors are normally distributed. The p-value < 2.2e-16 also strongly suggests the data is not normally distributed. Several transformations were then performed based on the appearance of residual plots, and the log transformation was applied to the predictors `CRIM`, `RM`, `DIS`, `TAX`, and `LSTAT`, as well as the response variable `MEDV`. These transformations help the data appear more normal and the residual plots for the predictors appear slightly more random. However, the problem of non-normality and non-constant error variance still persists. The BP test for constancy of error variance is still significant with a p-value < 2.2e-16 and the correlation test for normality remains significant has improved slightly, with a p-value < 1.451e-09. The model with applied transformations can be seen in [**_Table 2_**](#Table-2). The search for influential observations is taken on next.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Looking at the leverages, values exceeding $2p/n=22/506=0.0435$ would be considered outlying x values. For our data there are 37 observations possessing leverage values higher than 0.0435, and possibly influencing our regression parameters. To further investigate the high leverages the DFBETAS were computed for the data, and found that 31 observations held DFBETAS larger than $2/\sqrt{n}=2/\sqrt{506}=0.8891$ , so several observations are deemed influential in terms of the regression coefficients. On the brighter side all variance inflation factors are under 10, suggesting multicolinearity is not a major problem.
-###Conclusion
+### Conclusion
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The purpose of our study was to determine which covariates best influence median value of owner-occupied homes in Boston MA. We started with the twelve covariates listed above, and narrowed them down to a final reduced model after performing “best” subsets, stepwise regression and evaluating several different diagnostics, thereby creating a combination of covariates that is concise, yet complete. The final reduced model chosen is written out below.
 <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20Y%27%3D%5Cbeta_0%20&plus;%20%5Cbeta_1%5C%20CRIM%27%20&plus;%20%5Cbeta_2%5C%20ZN%20&plus;%20%5Cbeta_3%5C%20CHAS%20&plus;%20%5Cbeta_4%5C%20NOX&plus;%5Cbeta_5%5C%20RM%27&plus;%5Cbeta_6%20DIS%27%20&plus;%20%5Cbeta_7%5C%20RAD%20&plus;%20%5Cbeta_8%5C%20TAX%27&plus;%5Cbeta_9%5C%20PT%5C_RATIO%20&plus;%20%5Cbeta_%7B10%7D%5C%20LSTAT%27%20%5CRightarrow" border=0 />
 
@@ -21,9 +21,9 @@
 Where,
 <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20MEDV%27%20%3D%20log%5C%7BMEDV%5C%7D%2C%5C%20CRIM%27%3Dlog%5C%7BCRIM%5C%7D%2C%5C%20RM%27%3Dlog%20%5C%7BRM%5C%7D%2C%5C%20DIS%27%3Dlog%5C%7BDIS%5C%7D%2C%5C%20TAX%27%3Dlog%5C%7BTAX%5C%7D%5C%20LSTAT%27%3Dlog%5C%7BLSTAT%5C%7D" border=0 />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A possible future study could involve a spatially weighted regression (GWR) model. Since the Charles River dummy variable is determined by the observations Census tract boundary it’s safe to assume that all observations are measures at the Census tract level. A GWR model could provide better estimates since, especially for housing data, contiguous tracts may be more related than distant tracts. Robust regression might also be helpful to deal with the large number of influential cases present in the data.
-###Appendix
+### Appendix
 
-#####Table 1
+##### Table 1
 <table>
 <tr>
 <th></th><th>Estimate</th><th>Std. Error</th><th>t value</th><th>Pr(>|t|)</th>
@@ -72,7 +72,7 @@ Where,
 </tr>
 </table>
 
-#####Table 2
+##### Table 2
 <table>
 <tr>
 <th></th><th>Estimate</th><th>Std. Error</th><th>t value</th><th>Pr(>|t|)</th>
@@ -115,24 +115,24 @@ Where,
 </tr>
 </table>
 
-#####Plot 3
-####Scatterplot of Original Data
+##### Plot 3
+#### Scatterplot of Original Data
 ![ScatterplotOrigData](ScatterplotOrigData.png)
-#####Plot 4
+##### Plot 4
 ![HistogramResidOrigData](HistogramResidOrigData.png)
-#####Plot 5
+##### Plot 5
 ![HistogramResidReducedData](HistogramResidReducedData.png)
-#####Plot 6
+##### Plot 6
 ![NormPlotOrigData](NormPlotOrigData.png)
-#####Plot 7
+##### Plot 7
 ![NormPlotReducedData](NormPlotReducedData.png)
-#####Plot 8
-####Residual vs. Predictor Plots for Original Data
+##### Plot 8
+#### Residual vs. Predictor Plots for Original Data
 ![ResidVsPredictorOrigData](ResidVsPredictorOrigData.png)
-#####Plot 9
-####Residual vs. Predictor Plots for Reduced and Transformed Data
+##### Plot 9
+#### Residual vs. Predictor Plots for Reduced and Transformed Data
 ![ResidVsPredictoReducedData](ResidVsPredictorReducedData.png)
-#####Plot 10
+##### Plot 10
 ![ResidVsFittedOrigData](ResidVsFittedOrigData.png)
-#####Plot 11
+##### Plot 11
 ![ResidVsFittedReducedData](ResidVsFittedReducedData.png)
