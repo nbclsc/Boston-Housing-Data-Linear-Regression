@@ -28,7 +28,7 @@ Where,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A possible future study could involve a spatially weighted regression (GWR) model. Since the Charles River dummy variable is determined by the observations Census tract boundary it’s safe to assume that all observations are measures at the Census tract level. A GWR model could provide better estimates since, especially for housing data, contiguous tracts may be more related than distant tracts. Robust regression might also be helpful to deal with the large number of influential cases present in the data.
 ### Appendix
 
-##### Table 1
+#### _Table 1_
 <table>
 <tr>
 <th></th><th>Estimate</th><th>Std. Error</th><th>t value</th><th>Pr(>|t|)</th>
@@ -77,7 +77,7 @@ Where,
 </tr>
 </table>
 
-##### Table 2
+#### _Table 2_
 <table>
 <tr>
 <th></th><th>Estimate</th><th>Std. Error</th><th>t value</th><th>Pr(>|t|)</th>
@@ -120,24 +120,24 @@ Where,
 </tr>
 </table>
 
-##### Plot 3
+#### _Plot 3_
 #### Scatterplot of Original Data
 ![ScatterplotOrigData](ScatterplotOrigData.png)
-##### Plot 4
+#### _Plot 4_
 ![HistogramResidOrigData](HistogramResidOrigData.png)
-##### Plot 5
+#### _Plot 5_
 ![HistogramResidReducedData](HistogramResidReducedData.png)
-##### Plot 6
+#### _Plot 6_
 ![NormPlotOrigData](NormPlotOrigData.png)
-##### Plot 7
+#### _Plot 7_
 ![NormPlotReducedData](NormPlotReducedData.png)
-##### Plot 8
+#### _Plot 8_
 #### Residual vs. Predictor Plots for Original Data
 ![ResidVsPredictorOrigData](ResidVsPredictorOrigData.png)
-##### Plot 9
+#### _Plot 9_
 #### Residual vs. Predictor Plots for Reduced and Transformed Data
 ![ResidVsPredictoReducedData](ResidVsPredictorReducedData.png)
-##### Plot 10
+#### _Plot 10_
 ![ResidVsFittedOrigData](ResidVsFittedOrigData.png)
-##### Plot 11
+#### _Plot 11_
 ![ResidVsFittedReducedData](ResidVsFittedReducedData.png)
