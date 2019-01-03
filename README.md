@@ -22,6 +22,7 @@
 <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20%5Chat%7BMEDV%7D%20%3D%20exp%5C%7B5.3803%20-%200.0321%5C%20CRIM%27-%200.0011%5C%20ZN&plus;0.1155%5C%20CHAS-0.5675%5C%20NOX%20&plus;%200.36219%5C%20RM%27-0.1672%5C%20DIS%27&plus;0.0234%5C%20RAD-0.1785%5C%20TAX%27%20-%200.0331%5C%20PT%5C_RATIO%20-%200.4150%5C%20LSTAT%27%5C%7D" border=0 />
 
 Where,
+
 <img src="https://latex.codecogs.com/gif.latex?%5Cinline%20MEDV%27%20%3D%20log%5C%7BMEDV%5C%7D%2C%5C%20CRIM%27%3Dlog%5C%7BCRIM%5C%7D%2C%5C%20RM%27%3Dlog%20%5C%7BRM%5C%7D%2C%5C%20DIS%27%3Dlog%5C%7BDIS%5C%7D%2C%5C%20TAX%27%3Dlog%5C%7BTAX%5C%7D%5C%20LSTAT%27%3Dlog%5C%7BLSTAT%5C%7D" border=0 />
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A possible future study could involve a spatially weighted regression (GWR) model. Since the Charles River dummy variable is determined by the observations Census tract boundary it’s safe to assume that all observations are measures at the Census tract level. A GWR model could provide better estimates since, especially for housing data, contiguous tracts may be more related than distant tracts. Robust regression might also be helpful to deal with the large number of influential cases present in the data.
